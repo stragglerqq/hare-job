@@ -7,7 +7,7 @@ import { Technology } from '@core/technology/state/technology.model';
 @Injectable({ providedIn: 'root' })
 export class TechnologyQuery extends QueryEntity<TechnologyState> {
 
-  selectTechnologies$: Observable<Technology[]> = this.selectAll().pipe(filterNil);
+  selectTechnologie$: Observable<Technology[]> = this.selectAll().pipe(filterNil);
 
   constructor(protected store: TechnologyStore) {
     super(store);

@@ -17,6 +17,6 @@ export class TechnologyService {
   getAll(): Observable<Technology[]> {
     return this.http.get<TechnologyDto[]>(this.URL).pipe(
       map((technologyDtos: TechnologyDto[]) => technologyDtos.map(createTechnology)),
-      tap((categories: Technology[]) => this._technologyStore.set(categories)));
+      tap((technologies: Technology[]) => this._technologyStore.set(technologies)));
   }
 }
