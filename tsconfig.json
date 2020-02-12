@@ -9,15 +9,41 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
     "importHelpers": true,
     "target": "es2015",
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      /** Core module **/
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      /** Lazy loading modules **/
+      "@jobs/*": [
+        "src/app/jobs/*"
+      ],
+      /** Shared folders **/
+      "@components/*": [
+        "src/app/shared/components/*"
+      ],
+      "@directives/*": [
+        "src/app/shared/directives/*"
+      ],
+      "@enums/*": [
+        "src/app/shared/enums/*"
+      ],
+      /** Environments **/
+      "@env/*": [
+        "src/environments/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

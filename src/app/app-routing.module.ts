@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RouteStates } from './shared/enums/RouteStates';
-import { JobsContainerComponent } from './jobs/jobs-container.component';
+import { RouteStates } from '@enums/RouteStates';
+import { JobsContainerComponent } from '@jobs/jobs-container.component';
 
 const routes: Routes = [
   {
