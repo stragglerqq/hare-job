@@ -4,12 +4,18 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:proxy": "ng serve --proxy-config proxy.conf.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
+  "akitaCli": {
+    "customFolderName": "true",
+    "template": "angular",
+    "basePath": "./src/app/"
+  },
   "dependencies": {
     "@angular/animations": "~9.0.0",
     "@angular/cdk": "^9.0.0",
@@ -53,6 +59,7 @@
     "tslint": "~5.18.0",
     "typescript": "~3.7.5",
     "rxjs-tslint": "0.1.7",
-    "rxjs-tslint-rules": "4.24.3"
+    "rxjs-tslint-rules": "4.24.3",
+    "https-proxy-agent": "2.2.2"
   }
 }

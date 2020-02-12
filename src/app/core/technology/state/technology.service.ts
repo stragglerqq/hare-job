@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { TechnologyDto } from '@core/technology/interface';
 import { TechnologyStore } from '@core/technology/state/technology.store';
 import { Technology, createTechnology } from '@core/technology/state/technology.model';
+import { HttpService } from '@core/services/http.service';
 
 @Injectable({ providedIn: 'root' })
 export class TechnologyService {
-  private readonly URL: string = '/api/v1/technologies';
+  private readonly URL: string = 'technologies';
 
   constructor(private readonly _technologyStore: TechnologyStore,
-              private readonly http: HttpClient) {
+              private readonly http: HttpService) {
   }
 
   getAll(): Observable<Technology[]> {
