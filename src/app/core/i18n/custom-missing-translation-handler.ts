@@ -2,7 +2,7 @@ import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx
 import { environment } from '@env/environment';
 
 export class CustomMissingTranslationHandler implements MissingTranslationHandler {
-  handle(params: MissingTranslationHandlerParams) {
+  handle(params: MissingTranslationHandlerParams): void {
     if (environment.missingTranslationLogger) {
       console.warn(`Missing translation for '${params.key}' in '${params.translateService.currentLang}' language`);
     }

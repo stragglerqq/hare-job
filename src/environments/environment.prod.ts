@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  missingTranslationLogger: false,
+  availableLanguages: ['en', 'pl'],
+  apiUrl: '/api/v1',
+  testAttributes: true,
 };
