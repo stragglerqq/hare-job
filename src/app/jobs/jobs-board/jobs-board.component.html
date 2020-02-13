@@ -1,1 +1,10 @@
-<p>jobs-board works!</p>
+<div *ngIf="job$ | async as jobs">
+  <div *ngFor="let job of jobs">
+    <div *ngFor="let categoryId of job.categoryIds">
+      {{getCategory(categoryId) | async | json}}
+    </div>
+    <div *ngFor="let technologyId of job.technologyIds">
+      {{getTechnology(technologyId) | async | json}}
+    </div>
+  </div>
+</div>
