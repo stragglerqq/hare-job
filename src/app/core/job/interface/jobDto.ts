@@ -1,3 +1,5 @@
+import { Currency, Seniority } from '@enums/index';
+
 export interface JobDto {
   readonly id: string;
   readonly name: string;
@@ -5,7 +7,7 @@ export interface JobDto {
   readonly posted: string;
   readonly renewed: string;
   readonly logo: string;
-  readonly seniority: string;
+  readonly seniority: Seniority[];
   readonly url: string;
   readonly salary: Salary;
   readonly technologyIds: number[];
@@ -16,10 +18,4 @@ export interface Salary {
   from: number;
   to: number;
   currency: Currency;
-}
-
-export enum Currency {
-   PLN,
-   USD,
-   EUR
 }
