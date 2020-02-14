@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { JobQuery } from '@core/job/state';
 import { Category, CategoryQuery } from '@core/category/state';
 import { Technology, TechnologyQuery } from '@core/technology/state';
