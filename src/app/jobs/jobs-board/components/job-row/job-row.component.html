@@ -1,0 +1,30 @@
+<div class="job-row">
+  <div class="job-row__logo logo">
+    <img [src]="job.logo" class="logo__img" alt="" />
+  </div>
+  <div class="job-row__basic-information">
+    <div class="job-row__title">{{job.title}}</div>
+    <div class="job-row__name">{{job.name}}</div>
+  </div>
+  <div class="job-row__secondary-information">
+    <div class="job-row__salary">
+      <app-salary-box [min]="job.salary.from"
+                      [max]="job.salary.to"
+                      [currency]="job.salary.currency"
+
+      ></app-salary-box>
+    </div>
+    <div *ngIf="getTechnology(job.technologyIds[0]) | async as technology"
+         class="job-row__technology">
+      {{ technology.name }}
+    </div>
+  </div>
+
+</div>
+<!--    -->
+<!--    <div *ngFor="let categoryId of job.categoryIds">-->
+<!--      {{getCategory(categoryId) | async | json}}-->
+<!--    </div>-->
+<!--    <div *ngFor="let technologyId of job.technologyIds">-->
+<!--      {{getTechnology(technologyId) | async | json}}-->
+<!--    </div>-->
