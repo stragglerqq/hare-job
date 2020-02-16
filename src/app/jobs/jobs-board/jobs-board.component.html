@@ -1,5 +1,19 @@
-<div *ngIf="job$ | async as jobs" class="jobs-board">
-  <ng-container *ngFor="let job of jobs">
-    <app-job-row [job]="job"></app-job-row>
-  </ng-container>
+<div  class="jobs-board">
+  <app-jobs-filter></app-jobs-filter>
+
+  <div *ngIf="job$ | async as jobs; else loading" class="jobs-board__list">
+    <ng-container *ngIf="jobs.length > 0; else noJobs">
+      <ng-container *ngFor="let job of jobs">
+        <app-job-row [job]="job"></app-job-row>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>
+
+<ng-template #noJobs>
+  No Jobs :(
+</ng-template>
+
+<ng-template #loading>
+  wrum wrum ladujemy
+</ng-template>

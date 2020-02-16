@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { JobQuery } from '@core/job/state';
+import { JobsBoardService } from '@jobs/jobs-board/jobs-board.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-jobs-board',
@@ -7,10 +9,10 @@ import { JobQuery } from '@core/job/state';
   styleUrls: ['./jobs-board.component.scss']
 })
 export class JobsBoardComponent {
-  job$ = this.jobQuery.selectJob$;
+  job$ = this.jobsBoardService.getJobs();
 
   constructor(
-    private readonly jobQuery: JobQuery,
+    private readonly jobsBoardService: JobsBoardService,
   ) { }
 
 }

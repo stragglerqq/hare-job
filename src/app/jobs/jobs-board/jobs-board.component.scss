@@ -1,3 +1,5 @@
 .jobs-board {
-  border-top: 1px solid #595b5d;
+  &__list {
+    border-top: 1px solid #595b5d;
+  }
 }
