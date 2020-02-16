@@ -23,5 +23,4 @@ export class JobRowComponent {
   getTechnology(id: Technology['id']): Observable<Technology> {
     return this.technologyQuery.selectEntity(id);
   }
-
 }
