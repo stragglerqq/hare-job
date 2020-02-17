@@ -12,6 +12,7 @@ import { JobsFilterComponent } from './components/jobs-filter/jobs-filter.compon
   imports: [
     CommonModule,
     RouterModule.forChild(jobsBoardRoutes)
-  ]
+  ],
+  exports: [],
 })
 export class JobsBoardModule { }
