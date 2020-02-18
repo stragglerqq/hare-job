@@ -22,12 +22,22 @@ export class TechnologyFilterDialogComponent implements OnInit {
     this.technologie$ = this.technologyQuery.selectTechnologie$;
   }
 
+  isChecked(id: number): boolean {
+    return this.data.technologyIds.indexOf(id) > -1;
+  }
+
+  onChange(id: number): void {
+    this.data.technologyIds = this.isChecked(id) ?
+      this.data.technologyIds.filter((itemId: number) => id !== itemId) :
+      [...this.data.technologyIds, id];
+  }
+
   resetAllFilters(): void {
-    console.log(this.data);
-    this.dialogRef.close();
+    this.data.technologyIds = [];
+    this.dialogRef.close(this.data);
   }
 
   applyFilters(): void {
-    this.dialogRef.close({test: 'kek'});
+    this.dialogRef.close(this.data);
   }
 }

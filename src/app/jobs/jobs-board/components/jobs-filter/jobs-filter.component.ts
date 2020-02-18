@@ -55,25 +55,15 @@ export class JobsFilterComponent implements OnInit {
 
     const dialogRef = this.dialog.open(dialogClass, {
       width: '450px',
-      data: {
-        type,
-        filters: {...this.filters},
-      }
+      data: {...this.filters},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed ' + result);
+      if (!result) {
+        return;
+      }
+
+      this.filters = {...result};
     });
   }
-
-  // categoryDialog(): void {
-  //   this.openDialog(FilterType.CATEGORY);
-  //   // this.jobsBoardService.categoryId$.next([]);
-  // }
-  //
-  // technologyDialog(): void {
-  //   this.openDialog(FilterType.TECHNOLOGY);
-  //   // this.jobsBoardService.technologyId$.next([]);
-  // }
-
 }

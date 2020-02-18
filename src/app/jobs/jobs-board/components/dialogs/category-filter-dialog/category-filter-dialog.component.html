@@ -1,16 +1,15 @@
 <h1 mat-dialog-title>Trending categories</h1>
 <div mat-dialog-content class="dialog__content">
-
-<!--    <p>Trending categories</p>-->
-    <div *ngIf="categorie$ | async as categories" class="dialog__checkboxes-box checkboxes-box">
+    <div *ngIf="categorie$ | async as categories"
+         class="dialog__checkboxes-box checkboxes-box">
         <div *ngFor="let category of categories; index as i"
              class="checkboxes-box__checkbox">
-        <input type="checkbox" [attr.id]="i">
+            <input type="checkbox" [attr.id]="i"
+                   [checked]="isChecked(category.id)"
+                   (change)="onChange(category.id)">
             <label [attr.for]="i">{{category.name}}</label>
         </div>
-
     </div>
-
 </div>
 <div mat-dialog-actions class="dialog__actions">
     <button mat-button (click)="resetAllFilters()">Reset all</button>

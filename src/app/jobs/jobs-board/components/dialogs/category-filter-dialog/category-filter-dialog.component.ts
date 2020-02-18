@@ -22,13 +22,23 @@ export class CategoryFilterDialogComponent implements OnInit {
     this.categorie$ = this.categoryQuery.selectCategories$;
   }
 
+
+  isChecked(id: number): boolean {
+    return this.data.categoryIds.indexOf(id) > -1;
+  }
+
+  onChange(id: number): void {
+    this.data.categoryIds = this.isChecked(id) ?
+      this.data.categoryIds.filter((itemId: number) => id !== itemId) :
+      [...this.data.categoryIds, id];
+  }
+
   resetAllFilters(): void {
-    console.log(this.data);
-    this.dialogRef.close();
+    this.data.categoryIds = [];
+    this.dialogRef.close(this.data);
   }
 
   applyFilters(): void {
-    this.dialogRef.close({test: 'kek'});
+    this.dialogRef.close(this.data);
   }
-
 }

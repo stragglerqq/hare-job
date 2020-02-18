@@ -1,16 +1,15 @@
 <h1 mat-dialog-title>Trending technologies</h1>
 <div mat-dialog-content class="dialog__content">
-
-<!--    <p>Trending technologies</p>-->
     <div *ngIf="technologie$ | async as technologies"
          class="dialog__checkboxes-box checkboxes-box">
         <div *ngFor="let technology of technologies; index as i"
              class="checkboxes-box__checkbox">
-            <input type="checkbox" [attr.id]="i">
+            <input type="checkbox" [attr.id]="i"
+                   [checked]="isChecked(technology.id)"
+                   (change)="onChange(technology.id)">
             <label [attr.for]="i">{{technology.name}}</label>
         </div>
     </div>
-
 </div>
 <div mat-dialog-actions class="dialog__actions">
     <button mat-button (click)="resetAllFilters()">Reset all</button>
