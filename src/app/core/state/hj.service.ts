@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HjStore } from '@core/state/hj.store';
+import { HjState, HjStore } from '@core/state/hj.store';
 import { HjQuery } from '@core/state/hj.query';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TmService {
@@ -9,4 +10,15 @@ export class TmService {
     private _store: HjStore,
     private _tmQuery: HjQuery,
   ) { }
+
+  updateBoardViewFilters(filters: HjState['boardView']['filters']): Observable<void> {
+    return this._store.update((state: HjState) => {
+      return {
+        ...state,
+        ...{boardView: {
+              filters: {...filters}
+          }}
+      };
+    });
+  }
 }

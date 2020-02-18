@@ -33,10 +33,6 @@ export class JobsBoardService {
     );
   }
 
-  getJobs(): Observable<Job[]> {
-    return this.job$;
-  }
-
   private filterBySalary(salary: Salary): (job: Job) => boolean {
     return (job: Job) => true;
   }

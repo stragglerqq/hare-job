@@ -8,7 +8,7 @@ import { SalaryBoxComponent } from './components/salary-box/salary-box.component
 import { JobsFilterComponent } from './components/jobs-filter/jobs-filter.component';
 
 @NgModule({
-  declarations: [JobsBoardComponent, JobRowComponent, SalaryBoxComponent, JobsFilterComponent],
+  declarations: [JobsBoardComponent, JobRowComponent, SalaryBoxComponent, JobsFilterComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(jobsBoardRoutes)

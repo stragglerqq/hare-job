@@ -1,16 +1,16 @@
-<div (click)="addCategory()">
-    <span>+</span>
-    <span>category</span>
-</div>
-<div>
-    <span>+</span>
-    <span>salary</span>
-</div>
-<div (click)="addTechnology()">
-    <span>+</span>
-    <span>technology</span>
-</div>
-<div (click)="openDialog()">
-    <span>+</span>
-    <span>category</span>
+<div *ngIf="filter$ | async">
+
+    <div (click)="openDialog(filterType.SALARY)">
+        <span>+</span>
+        <span>salary</span>
+    </div>
+    <div (click)="openDialog(filterType.TECHNOLOGY)">
+        <span>+</span>
+        <span>technology</span>
+    </div>
+    <div (click)="openDialog(filterType.CATEGORY)">
+        <span>+</span>
+        <span>category</span>
+    </div>
+
 </div>

@@ -1,0 +1,23 @@
+.dialog {
+
+  &__content {
+    margin: 20px;
+    padding: 20px;
+  }
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__checkboxes-box {
+    display: flex;
+    flex-flow: row;
+  }
+}
+
+.checkboxes-box {
+  &__checkbox {
+    margin-right: 40px;
+  }
+}
+

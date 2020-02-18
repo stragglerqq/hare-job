@@ -1,7 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsBoardService } from '@jobs/jobs-board/jobs-board.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CheckboxFilterDialogComponent } from '@components/checkbox-filter-dialog.component';
+import { CheckboxFilterDialogComponent } from '@components/checkbox-filter-dialog/checkbox-filter-dialog.component';
+import { HjQuery, HjState } from '@core/state';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { CategoryFilterDialogComponent } from '@jobs/jobs-board/components/dialogs/category-filter-dialog/category-filter-dialog.component';
+import { TechnologyFilterDialogComponent } from '@jobs/jobs-board/components/dialogs/technology-filter-dialog/technology-filter-dialog.component';
+import { SalaryFilterDialogComponent } from '@jobs/jobs-board/components/dialogs/salary-filter-dialog/salary-filter-dialog.component';
+
+export enum FilterType {
+  CATEGORY,
+  TECHNOLOGY,
+  SALARY
+}
 
 @Component({
   selector: 'app-jobs-filter',
@@ -9,30 +21,59 @@ import { CheckboxFilterDialogComponent } from '@components/checkbox-filter-dialo
   styleUrls: ['./jobs-filter.component.scss']
 })
 export class JobsFilterComponent implements OnInit {
+  filter$: Observable<HjState['boardView']['filters']>;
+  filters: HjState['boardView']['filters'];
+  filterType = FilterType;
 
   constructor(
     private readonly jobsBoardService: JobsBoardService,
+    private readonly hjQuery: HjQuery,
     public dialog: MatDialog,
   ) { }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(CheckboxFilterDialogComponent, {
-      width: '250px',
-      data: {name: 'p', animal: 'pp0'}
+  ngOnInit(): void {
+    this.filter$ = this.hjQuery.selectBoardViewCurrentFilter$.pipe(
+      tap((filters: HjState['boardView']['filters']) => this.filters = filters)
+    );
+  }
+
+  openDialog(type: FilterType): void {
+    let dialogClass;
+    switch (type) {
+      case FilterType.CATEGORY:
+        dialogClass = CategoryFilterDialogComponent;
+        break;
+      case FilterType.TECHNOLOGY:
+        dialogClass = TechnologyFilterDialogComponent;
+        break;
+      case FilterType.SALARY:
+        dialogClass = SalaryFilterDialogComponent;
+        break;
+      default:
+        break;
+    }
+
+    const dialogRef = this.dialog.open(dialogClass, {
+      width: '450px',
+      data: {
+        type,
+        filters: {...this.filters},
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed ' + result);
     });
   }
-  ngOnInit(): void {
-  }
 
-  addCategory(): void {
-    this.jobsBoardService.categoryId$.next([]);
-  }
+  // categoryDialog(): void {
+  //   this.openDialog(FilterType.CATEGORY);
+  //   // this.jobsBoardService.categoryId$.next([]);
+  // }
+  //
+  // technologyDialog(): void {
+  //   this.openDialog(FilterType.TECHNOLOGY);
+  //   // this.jobsBoardService.technologyId$.next([]);
+  // }
 
-  addTechnology(): void {
-    this.jobsBoardService.technologyId$.next([]);
-  }
 }

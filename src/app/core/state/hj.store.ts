@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
+import { Salary } from '@core/job/interface/jobDto';
 
 export interface HjState {
-  name: string;
+  boardView: {
+    filters: {
+      categoryIds: number[],
+      technologyIds: number[],
+      salary: Salary
+    }
+  };
 }
 
 export function createInitialState(params?: Partial<HjState>): HjState {
-  return {name: 'test'};
+  return {
+    boardView: {
+      filters: {
+        categoryIds: [],
+        technologyIds: [],
+        salary: null
+      }
+    }
+  };
 }
 
 @Injectable({ providedIn: 'root' })
