@@ -1,7 +1,7 @@
-<!--<h1 mat-dialog-title>Hi {{data | json}}</h1>-->
+<h1 mat-dialog-title>Trending technologies</h1>
 <div mat-dialog-content class="dialog__content">
 
-    <p>Trending technologies</p>
+<!--    <p>Trending technologies</p>-->
     <div *ngIf="technologie$ | async as technologies"
          class="dialog__checkboxes-box checkboxes-box">
         <div *ngFor="let technology of technologies; index as i"

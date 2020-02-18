@@ -1,11 +1,11 @@
-<!--<h1 mat-dialog-title>Hi {{data | json}}</h1>-->
+<h1 mat-dialog-title>Trending categories</h1>
 <div mat-dialog-content class="dialog__content">
 
-    <p>Trending categories</p>
-    <div *ngIf="categorie$ | async as categories">
+<!--    <p>Trending categories</p>-->
+    <div *ngIf="categorie$ | async as categories" class="dialog__checkboxes-box checkboxes-box">
         <div *ngFor="let category of categories; index as i"
-             class="dialog__checkboxes-box checkboxes-box">
-            <input type="checkbox" [attr.id]="i">
+             class="checkboxes-box__checkbox">
+        <input type="checkbox" [attr.id]="i">
             <label [attr.for]="i">{{category.name}}</label>
         </div>
 

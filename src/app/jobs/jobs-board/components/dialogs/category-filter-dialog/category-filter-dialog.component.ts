@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category, CategoryQuery } from '@core/category/state';
-import { Technology, TechnologyQuery } from '@core/technology/state';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FilterType } from '@jobs/jobs-board/components/jobs-filter/jobs-filter.component';
 import { HjState } from '@core/state';
 
 @Component({
