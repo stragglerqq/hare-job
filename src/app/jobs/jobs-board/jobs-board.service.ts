@@ -3,33 +3,30 @@ import { Job, JobQuery } from '@core/job/state';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { Salary } from '@core/job/interface/jobDto';
+import { HjQuery, HjState } from '@core/state';
 
 @Injectable({ providedIn: 'root' })
 export class JobsBoardService {
   job$: Observable<Job[]>;
-  jobsBS = new ReplaySubject<Job[]>();
-  categoryId$ = new BehaviorSubject<number[]>([]);
-  technologyId$ = new BehaviorSubject<number[]>([]);
-  salary$ = new BehaviorSubject<Salary>(null);
+
   DEBOUNCE_TIME = 500;
 
   constructor(
     private readonly jobQuery: JobQuery,
+    private readonly hjQuery: HjQuery,
+
   ) {
-    this.job$ = combineLatest([this.categoryId$, this.technologyId$, this.salary$]).pipe(
+    this.job$ = this.hjQuery.selectBoardViewCurrentFilter$.pipe(
       debounceTime(this.DEBOUNCE_TIME),
       distinctUntilChanged(),
-      switchMap(([categoryIds, technologyIds, salary]:
-                   [number[], number[], Salary]) => {
+      switchMap((filters: HjState['boardView']['filters']) => {
         return this.jobQuery.selectAll({filterBy: [
-            this.filterByCategoryIds(categoryIds),
-            this.filterByTechnologyIds(technologyIds),
-            this.filterBySalary(salary)
+            this.filterByCategoryIds(filters.categoryIds),
+            this.filterByTechnologyIds(filters.technologyIds),
+            this.filterBySalary(filters.salary)
         ]});
       }),
-      tap((jobs: Job[]) => {
-        this.jobsBS.next(jobs);
-      })
+
     );
   }
 

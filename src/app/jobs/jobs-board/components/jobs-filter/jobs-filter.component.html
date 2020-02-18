@@ -1,16 +1,33 @@
-<div *ngIf="filter$ | async">
-
-    <div (click)="openDialog(filterType.SALARY)">
-        <span>+</span>
-        <span>salary</span>
-    </div>
-    <div (click)="openDialog(filterType.TECHNOLOGY)">
+<div class="jobs-filter">
+    <div (click)="openDialog(filterType.TECHNOLOGY)" class="jobs-filter__filter">
         <span>+</span>
         <span>technology</span>
     </div>
-    <div (click)="openDialog(filterType.CATEGORY)">
+    <div (click)="openDialog(filterType.CATEGORY)" class="jobs-filter__filter">
         <span>+</span>
         <span>category</span>
     </div>
-
+    <div (click)="openDialog(filterType.SALARY)" class="jobs-filter__filter">
+        <span>+</span>
+        <span>salary</span>
+    </div>
+</div>
+<div *ngIf="filter$ | async" class="jobs-filter__selection-list selection-list">
+    <span>Applied filters:</span>
+    <ng-container *ngIf="technologie$ | async as technologies">
+        <span>(</span>
+        <div *ngFor="let technology of technologies; last as isLast">
+            <span class="selection-list__element selection-list__technology">{{technology.name}}</span>
+            <span *ngIf="!isLast">||</span>
+        </div>
+        <span>)</span>
+    </ng-container>
+    <ng-container *ngIf="categorie$ | async as categories">
+        <span>&& (</span>
+        <div *ngFor="let category of categories; last as isLast">
+            <span class="selection-list__element selection-list__category">{{category.name}}</span>
+            <span *ngIf="!isLast">||</span>
+        </div>
+        <span>)</span>
+    </ng-container>
 </div>

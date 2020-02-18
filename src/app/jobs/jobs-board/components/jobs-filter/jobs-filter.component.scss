@@ -1,0 +1,26 @@
+.jobs-filter {
+  display: flex;
+  flex-flow: row;
+  &__filter {
+    margin: 20px;
+  }
+
+  &__selection-list {
+    display: flex;
+    flex-flow: row;
+  }
+}
+
+.selection-list {
+  margin-bottom: 10px;
+  &__element {
+    margin-right: 8px;
+  }
+  &__technology {
+    color: #FFC66D;
+  }
+
+  &__category {
+    background-color: #287BDE;
+  }
+}
