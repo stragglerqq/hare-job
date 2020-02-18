@@ -4,7 +4,7 @@ import { HjQuery } from '@core/state/hj.query';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class TmService {
+export class HjService {
 
   constructor(
     private _store: HjStore,

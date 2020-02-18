@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsBoardService } from '@jobs/jobs-board/jobs-board.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CheckboxFilterDialogComponent } from '@components/checkbox-filter-dialog/checkbox-filter-dialog.component';
-import { HjQuery, HjState } from '@core/state';
+import { HjQuery, HjService, HjState } from '@core/state';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { CategoryFilterDialogComponent } from '@jobs/jobs-board/components/dialogs/category-filter-dialog/category-filter-dialog.component';
@@ -28,6 +27,7 @@ export class JobsFilterComponent implements OnInit {
   constructor(
     private readonly jobsBoardService: JobsBoardService,
     private readonly hjQuery: HjQuery,
+    private readonly hjService: HjService,
     public dialog: MatDialog,
   ) { }
 
@@ -58,12 +58,12 @@ export class JobsFilterComponent implements OnInit {
       data: {...this.filters},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: HjState['boardView']['filters']) => {
       if (!result) {
         return;
       }
 
-      this.filters = {...result};
+      this.hjService.updateBoardViewFilters(result);
     });
   }
 }
