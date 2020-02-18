@@ -1,0 +1,18 @@
+<!--<h1 mat-dialog-title>Hi {{data | json}}</h1>-->
+<div mat-dialog-content class="dialog__content">
+
+    <p>Trending technologies</p>
+    <div *ngIf="technologie$ | async as technologies"
+         class="dialog__checkboxes-box checkboxes-box">
+        <div *ngFor="let technology of technologies; index as i"
+             class="checkboxes-box__checkbox">
+            <input type="checkbox" [attr.id]="i">
+            <label [attr.for]="i">{{technology.name}}</label>
+        </div>
+    </div>
+
+</div>
+<div mat-dialog-actions class="dialog__actions">
+    <button mat-button (click)="resetAllFilters()">Reset all</button>
+    <button mat-button (click)="applyFilters()" cdkFocusInitial>Apply</button>
+</div>
