@@ -60,6 +60,6 @@
     "typescript": "~3.7.5",
     "rxjs-tslint": "0.1.7",
     "rxjs-tslint-rules": "4.24.3",
-    "https-proxy-agent": "2.2.2"
+    "https-proxy-agent": "2.2.3"
   }
 }
