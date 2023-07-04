@@ -13,7 +13,13 @@ public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int 
 "@ -Name "Win32SetWindowPos" -Namespace "Win32Functions" -PassThru
 
     # Wait for the process to create its window
-    Start-Sleep -Milliseconds 200
+    Start-Sleep -Seconds 2
+
+    # Keep polling for the window handle in case it's not immediately available
+    while ($process.MainWindowHandle -eq 0) {
+        $process.Refresh()
+        Start-Sleep -Milliseconds 100
+    }
 
     # Change the window size and position
     $SetWindowPos::SetWindowPos($process.MainWindowHandle, [IntPtr]::Zero, $left, $top, $width, $height, $SWP_SHOWWINDOW)
@@ -34,4 +40,7 @@ for ($i = 0; $i -lt $projectNames.Length; $i++) {
 
     # Start the process with the specified size and position
     Start-ProcessWithSizeAndPosition -path "powershell.exe" -arguments "-NoExit", "-Command $command" -width 600 -height 400 -left $left -top $top
+
+    # Wait a bit to give the window time to open before starting the next one
+    Start-Sleep -Seconds 3
 }
