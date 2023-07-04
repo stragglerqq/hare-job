@@ -1,0 +1,35 @@
+start powershell -NoExit -Command "$host.UI.RawUI.WindowTitle='PS Window 1'; cd 'C:\Users\sebastian'; npm run start"
+cscript SetWindowSizeAndPosition.vbs "PS Window 1" 0 0
+start powershell -NoExit -Command "$host.UI.RawUI.WindowTitle='PS Window 2'; cd 'C:\Users\sebastian'; npm run start"
+cscript SetWindowSizeAndPosition.vbs "PS Window 2" 640 0
+start powershell -NoExit -Command "$host.UI.RawUI.WindowTitle='PS Window 3'; cd 'C:\Users\sebastian'; npm run start"
+cscript SetWindowSizeAndPosition.vbs "PS Window 3" 1280 0
+start powershell -NoExit -Command "$host.UI.RawUI.WindowTitle='PS Window 4'; cd 'C:\Users\sebastian'; npm run start"
+cscript SetWindowSizeAndPosition.vbs "PS Window 4" 0 480
+start powershell -NoExit -Command "$host.UI.RawUI.WindowTitle='PS Window 5'; cd 'C:\Users\sebastian'; npm run start"
+cscript SetWindowSizeAndPosition.vbs "PS Window 5" 640 480
+If WScript.Arguments.Count <> 3 Then
+    WScript.Echo "Usage: SetWindowSizeAndPosition.vbs title left top"
+    WScript.Quit
+End If
+ 
+windowTitle = WScript.Arguments(0)
+windowLeft = CInt(WScript.Arguments(1))
+windowTop = CInt(WScript.Arguments(2))
+ 
+Set objShell = CreateObject("Shell.Application")
+ 
+Do While objShell.Windows.Count = 0
+    WScript.Sleep 100
+Loop
+ 
+For Each objWindow In objShell.Windows
+    If InStr(objWindow.FullName, "powershell.exe") > 0 And _
+       InStr(objWindow.Document.Title, windowTitle) > 0 Then
+        objWindow.Left = windowLeft
+        objWindow.Top = windowTop
+        objWindow.Width = 640
+        objWindow.Height = 480
+        Exit For
+    End If
+Next
